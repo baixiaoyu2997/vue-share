@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>循环</title>
+    <link rel="stylesheet" href="../dist/part4/demo.css">
+    <script src="../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p v-for="item in arr">
+            {{item.text}}
+        </p>
+        <!-- <p v-for="(item,index) in arr" :id="item.id" :key="item.id">
+            {{index+1}}.{{item.text}}
+        </p> -->
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                arr: [{
+                    id:"p1",
+                    text: "a"
+                }, {
+                    id:"p2",
+                    text: "b"
+                }, {
+                    id:"p3",
+                    text: "c"
+                }, {
+                    id:"p4",
+                    text: "d"
+                }],
+            }
+        })
+    </script>
+</body>
+
+</html>

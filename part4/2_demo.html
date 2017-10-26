@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>声明式渲染</title>
+    <link href="../dist/part4/demo.css" rel="stylesheet">
+    <script src="../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <input type="text" v-model="message">
+    </div>
+    <script>
+        new Vue({
+            el: '#app',                  //挂载元素
+            data: {                      //数据
+                message: 'Hello Vue.js!' //用模板语法来声明式的将数据渲染进DOM
+            }
+        })
+    </script>
+</body>
+
+</html>

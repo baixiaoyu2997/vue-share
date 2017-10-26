@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../dist/part4/demo.css">
+    <script src="../dist/jquery.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p class="p-text"></p>
+        <input type="text" class="input-text">
+    </div>
+    <script>
+        $().ready(function (e) {
+            var message = "Hello Vue.js!";                     //设置变量
+            var $pText = $(".p-text");                         //获取p元素
+            var $inputText = $(".input-text");                 //获取input元素
+            $pText.text(message);                              //给p元素赋值
+            $inputText.val(message).on('input', function (e) { 
+                $pText.text(this.value)                        //当input元素输入时，同时变更p元素的值
+            });
+        })
+    </script>
+</body>
+
+</html>

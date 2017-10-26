@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>处理用户输入</title>
+    <link rel="stylesheet" href="../dist/part4/demo.css">
+    <script src="../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="count+=1">点击次数{{count}}</button>
+        <!-- <button v-on:click="editText">{{count}}</button> -->
+        <!-- <button @click="editText">{{count}}</button> -->
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            methods: {
+                editText() {
+                    this.count = (this.count*10-9)/2;
+                },
+                // editText:function(){
+                //     this.count = (this.count*10-9)/2;
+                // }
+            }
+        })
+       
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>非父子组件通信</title>
+    <link href="../dist/part12/demo.css" rel="stylesheet">
+    <script src="../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <item-one></item-one>
+        <item-two></item-two>
+       
+    </div>
+    <script>
+        Vue.component("item-one", {
+            template: "<button @click='submit'>item-one</buttn>",
+            methods:{
+                submit(){
+                    this.$root.Bus.$emit("submitEvent",123);
+                }
+            }
+        })
+        Vue.component("item-two", {
+            template: "<button>{{text}}</button>",
+            data(){
+                return {
+                    text:"item-two"
+                }
+            },
+            create(){
+                this.$root.Bus.$on("submitEvent",function(e){
+                    this.text="来自item-one的你"
+                })
+            }
+        })
+        new Vue({
+            el: '#app',
+            data:{
+                Bus:new Vue()//在复杂的情况下，我们应该考虑使用专门的状态管理模式--vuex
+            }
+        })
+
+    </script>
+</body>
+
+</html>

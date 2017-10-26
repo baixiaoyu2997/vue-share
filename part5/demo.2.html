@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>条件判断</title>
+    <link rel="stylesheet" href="../dist/part5/demo2.css">
+    <script src="../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <p v-if="see===1">现在为1</p>
+        <p v-else-if="see===2">现在为2</p>
+        <p v-else>这个例子演示了我们不仅可以绑定 DOM 文本到数据，也可以绑定 DOM 结构到数据</p>
+
+        <p v-show="!see">v-show始终都会渲染，只是简单地切换css中的display</p>
+
+        <template v-if="ok">
+            <span>因为 v-if 是一个指令，所以必须将它添加到一个元素上。但是如果想切换多个元素呢？</span>
+            <span>此时可以把一个template元素当做不可见的包裹元素，并在上面使用 v-if。</span>
+            <span>最终的渲染结果将不包含 template元素。 </span>
+        </template>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                see: 1,//false
+                ok:true
+            }
+        })
+    </script>
+</body>
+
+</html>

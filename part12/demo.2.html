@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子组件触发父组件方法</title>
+    <link href="../dist/part12/demo.css" rel="stylesheet">
+    <script src="../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ol>
+            <todo-item v-for="(item,index) in arr" text="代办项" :id="item.id" :key="item.id" @remove="arr.splice(index, 1)"></todo-item>
+        </ol>
+    </div>
+    <script>
+        Vue.component("todo-item", {
+            props: ["text", "id"],
+            template: '<li @click="$emit(\'remove\')">{{text}}{{id}}</li>'
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                arr: [{
+                    id: 1
+                }, {
+                    id: 2
+                }, {
+                    id: 3
+                }]
+            }
+        })
+    </script>
+</body>
+
+</html>

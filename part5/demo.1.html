@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Class与Style绑定</title>
+    <link rel="stylesheet" href="../dist/part5/demo1.css">
+    <script src="../dist/vue.js"></script>
+    <style>
+        .colorGreen {
+            color: #42b983;
+        }
+
+        .font-style {
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p v-bind:title="title">鼠标悬停几秒钟查看此处动态绑定的提示信息！</p>
+
+        <p :title="title">v-bind缩写语法</p>
+
+        <p :class="{colorGreen:green}">绑定HTML Class,对象语法</p>
+
+        <p class="font-style" :class="{colorGreen:green}">绑定HTML Class同样可以与普通class共存</p>
+
+        <p :class="[classOne,classTwo]">绑定HTML Class,数组语法</p>
+
+        <p :style="{color:blue}">绑定HTML style</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                title: "在这停顿",
+                green: true,
+                classOne: "colorGreen",
+                classTwo: "font-style",
+                blue: "skyblue"
+            }
+        })
+    </script>
+</body>
+
+</html>

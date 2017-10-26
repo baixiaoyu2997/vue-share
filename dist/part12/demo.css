@@ -1,0 +1,17 @@
+body{
+    background: #1e1e1e;
+}
+#app {
+    height: 300px;
+    width: 185.4px;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 30px;
+    color: #42b983;
+    font-size: 25px;
+}

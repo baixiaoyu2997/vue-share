@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据绑定</title>
+    <link href="../dist/part4/demo.css" rel="stylesheet">
+    <script src="../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <p>{{message}}</p> -->
+        <p v-text="message"></p>
+        <p v-once>{{message}}</p>  
+        <input type="text" v-model="message">   
+            
+        <p v-html="element"></p>         
+    </div>
+    <script>
+        new Vue({
+            el: '#app',                 
+            data: {                     
+                message: 'Hello Vue.js!',
+                element:"<img src='../dist/part5/logo.png' style='width:50px'>"
+            }
+        })
+    </script>
+</body>
+
+</html>

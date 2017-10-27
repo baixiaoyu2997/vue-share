@@ -14,37 +14,37 @@
     <div id="app">
         <item-one></item-one>
         <item-two></item-two>
-       
+
     </div>
     <script>
         Vue.component("item-one", {
-            template: "<button @click='submit'>item-one</buttn>",
-            methods:{
-                submit(){
-                    this.$root.Bus.$emit("submitEvent",123);
+            template: "<button @click='submit()'>item-one</button>",
+            methods: {
+                submit() {
+                    this.$root.Bus.$emit("submitEvent", "我来自item-one");
                 }
             }
         })
         Vue.component("item-two", {
             template: "<button>{{text}}</button>",
-            data(){
+            data() {
                 return {
-                    text:"item-two"
+                    text: "item-two"
                 }
             },
-            create(){
-                this.$root.Bus.$on("submitEvent",function(e){
-                    this.text="来自item-one的你"
+            created() {
+                var that = this;
+                this.$root.Bus.$on("submitEvent", function (value) {
+                    that.text = value;
                 })
-            }
+            },
         })
         new Vue({
             el: '#app',
-            data:{
-                Bus:new Vue()//在复杂的情况下，我们应该考虑使用专门的状态管理模式--vuex
+            data: {
+                Bus: new Vue() //在复杂的情况下，我们应该考虑使用专门的状态管理模式--vuex 
             }
         })
-
     </script>
 </body>
 

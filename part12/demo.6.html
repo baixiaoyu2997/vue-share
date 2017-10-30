@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vuex</title>
+    <link href="../dist/part12/demo.css" rel="stylesheet">
+    <script src="../dist/vue.js"></script>
+    <script src="../dist/vuex.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{$store.state.count}}</p>
+        <item-one></item-one>
+        <item-two></item-two>
+    </div>
+    <script>
+        var store=new Vuex.Store({
+            state:{      //状态
+                count:1
+            },
+            mutations:{  //变化
+                addCount(state,n){
+                    return state.count+=n;
+                },
+                reduceCount(state,n){
+                    return state.count-=n;
+                }
+            }
+        })
+        
+        Vue.component("item-one", {
+            template: "<button @click='add'>+2</button>",
+            methods: {
+                add(){
+                    this.$store.commit("addCount",2) //多个参数使用对象
+                }
+            }
+        })
+
+        Vue.component("item-two", {
+            template: "<button @click='reduce'>-1</button>",
+            methods: {
+               reduce(){
+                   this.$store.commit("reduceCount",1)
+               }
+            }
+        })
+
+        new Vue({
+            el: '#app',
+            store,
+            // computed:{
+            //     count(){
+            //         return this.$store.state.count
+            //     }
+            // }
+        })
+    </script>
+</body>
+
+</html>

@@ -5,46 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>非父子组件通信</title>
+    <title>父子组件数据同步</title>
     <link href="../dist/part12/demo.css" rel="stylesheet">
     <script src="../dist/vue.js"></script>
 </head>
 
 <body>
     <div id="app">
-        <item-one></item-one>
-        <item-two></item-two>
-
+        <!-- <p-item :text.sync="text"></p-item> -->
+        <p-item :text="text"  @update:text="val => text = val"></p-item>
     </div>
     <script>
-        Vue.component("item-one", {
-            template: "<button @click='submit()'>item-one</button>",
-            methods: {
-                submit() {
-                    this.$root.Bus.$emit("submitEvent", "我来自item-one");
+        // 全局注册
+        Vue.component("p-item", {
+            props:["text"],
+            template: "<p @click='update()'>{{text}}</p>",
+            methods:{
+                update(){
+                    this.$emit("update:text","这是子组件传的值")
                 }
             }
         })
-        Vue.component("item-two", {
-            template: "<button>{{text}}</button>",
-            data() {
-                return {
-                    text: "item-two"
-                }
-            },
-            created() {
-                var that = this;
-                this.$root.Bus.$on("submitEvent", function (value) {
-                    that.text = value;
-                })
-            },
-        })
+
         new Vue({
             el: '#app',
-            data: {
-                Bus: new Vue() //在复杂的情况下，我们应该考虑使用专门的状态管理模式--vuex 
+            data:{
+                text:"这是父组件传过去的值"
             }
         })
+
     </script>
 </body>
 

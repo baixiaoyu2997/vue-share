@@ -5,50 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>插槽</title>
-    <link href="../dist/part12/demo.5.css" rel="stylesheet">
+    <title>非父子组件通信</title>
+    <link href="../dist/part12/demo.css" rel="stylesheet">
     <script src="../dist/vue.js"></script>
 </head>
 
 <body>
     <div id="app">
-        <app-header>
-            首页
-        </app-header>
-
-        <div class="body">
-            <div>内容</div>
-        </div>
+        <item-one></item-one>
+        <item-two></item-two>
     </div>
     <script>
-        
-        //单个插槽
-        Vue.component("app-header", {
-            template: `<div class='app-header'>
-                           <div>返回</div>
-                           <slot>
-                               <div>死辣特标签</div>
-                           </slot>
-                           <div>菜单</div>
-                        </div>`
-            //反撇号 更好的展示模板字符串
+        Vue.component("item-one", {
+            template: "<button @click='submit()'>item-one</button>",
+            methods: {
+                submit() {
+                    this.$root.Bus.$emit("submitEvent", "我来自item-one");
+                }
+            }
         })
-
-        //具名插槽
-        // Vue.component("app-header", {
-        //     template: `<div class='app-header'>
-        //                    <div>
-        //                         <slot name="back"></slot>
-        //                    </div>
-        //                    <slot>
-        //                        <div>死辣特标签</div>
-        //                    </slot>
-        //                    <div><slot name="menu"></slot></div>
-        //                 </div>`
-        // })
-
+        Vue.component("item-two", {
+            template: "<button>{{text}}</button>",
+            data() {
+                return {
+                    text: "item-two"
+                }
+            },
+            created() {
+                var that = this;
+                this.$root.Bus.$on("submitEvent", function (value) {
+                    that.text = value;
+                })
+            },
+        })
         new Vue({
-            el: '#app'
+            el: '#app',
+            data: {
+                Bus: new Vue() //在复杂的情况下，我们应该考虑使用专门的状态管理模式--vuex 
+            }
         })
     </script>
 </body>

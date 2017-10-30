@@ -12,12 +12,12 @@
 
 <body>
     <div id="app">
-        <p v-for="item in arr">
+        <!-- <p v-for="item in arr">
             {{item.text}}
-        </p>
-        <!-- <p v-for="(item,index) in arr" :id="item.id" :key="item.id">
-            {{index+1}}.{{item.text}}
         </p> -->
+        <p v-for="(item,index) in arr" :id="item.id" :key="item.id">
+            {{index+1}}.{{item.text}}
+        </p>
     </div>
     <script>
         new Vue({

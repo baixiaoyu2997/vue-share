@@ -5,33 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>父子组件通信</title>
-    <link href="../dist/part12/demo.css" rel="stylesheet">
+    <title>插槽</title>
+    <link href="../dist/part12/demo.5.css" rel="stylesheet">
     <script src="../dist/vue.js"></script>
 </head>
 
 <body>
     <div id="app">
-        <ol>
-            <todo-item v-for="item in arr" text="代办项" :id="item.id" :key="item.id"></todo-item>
-        </ol>
+        <app-header>
+            标题
+        </app-header>
+
+        <div class="body">
+            <div>内容</div>
+        </div>
     </div>
     <script>
-        Vue.component("todo-item",{
-            props:["text","id"],
-            template:"<li>{{text}}{{id}}</li>"
+        
+        //单个插槽
+        Vue.component("app-header", {
+            template: `<div class='app-header'>
+                           <div>返回</div>
+                           <slot>
+                               <div>死辣特标签</div>
+                           </slot>
+                           <div>菜单</div>
+                        </div>`
+            //反撇号 更好的展示模板字符串
         })
+
+        //具名插槽
+        // Vue.component("app-header", {
+        //     template: `<div class='app-header'>
+        //                    <div>
+        //                         <slot name="back"></slot>
+        //                    </div>
+        //                    <slot>
+        //                        <div>死辣特标签</div>
+        //                    </slot>
+        //                    <div><slot name="menu"></slot></div>
+        //                 </div>`
+        // })
+
         new Vue({
-            el: '#app',
-            data:{
-                arr:[{
-                    id:1
-                },{
-                    id:2
-                },{
-                    id:3
-                }]
-            }        
+            el: '#app'
         })
     </script>
 </body>

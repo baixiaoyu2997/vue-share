@@ -19,7 +19,9 @@
         Vue.component("p-item", {
             template: "<p style='color:skyblue'>1.这是个代办项</p>",
             data(){
-                text:"组件中的data必须是函数"
+                return {
+                    text:"组件中的data必须是函数"
+                }
             }
         })
         new Vue({

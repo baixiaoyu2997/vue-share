@@ -5,35 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>父子组件数据同步</title>
+    <title>子组件触发父组件方法</title>
     <link href="../dist/part12/demo.css" rel="stylesheet">
     <script src="../dist/vue.js"></script>
 </head>
 
 <body>
     <div id="app">
-        <p-item :text.sync="text"></p-item>
-        <!-- <p-item :text="text"  @update:foo="val => text = val"></p-item> -->
+        <ol>
+            <todo-item v-for="(item,index) in arr" text="代办项" :id="item.id" :key="item.id" @remove="arr.splice(index, 1)"></todo-item>
+        </ol>
     </div>
     <script>
-        // 全局注册
-        Vue.component("p-item", {
-            props:["text"],
-            template: "<p @click='update()'>{{text}}</p>",
-            methods:{
-                update(){
-                    this.$emit("update:text","这是子组件传的值")
-                }
-            }
+        Vue.component("todo-item", {
+            props: ["text", "id"],
+            template: '<li @click="$emit(\'remove\')">{{text}}{{id}}</li>'
         })
-
         new Vue({
             el: '#app',
-            data:{
-                text:"这是父组件传过去的值"
+            data: {
+                arr: [{
+                    id: 1
+                }, {
+                    id: 2
+                }, {
+                    id: 3
+                }]
             }
         })
-
     </script>
 </body>
 

@@ -19,6 +19,10 @@
     <script>
         Vue.component("todo-item",{
             props:["text","id"],
+            // props:{
+            //     text:String,  //注意大小写
+            //     id:Number
+            // },
             template:"<li>{{text}}{{id}}</li>"
         })
         new Vue({
